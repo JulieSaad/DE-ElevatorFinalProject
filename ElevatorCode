@@ -1,0 +1,30 @@
+#Final Project - Elevator Code by Julie and Emily
+from pitop import UltrasonicSensor, Pitop, EncoderMotor, ForwardDirection, BrakingType
+from time import sleep
+
+motor = EncoderMotor("M0", ForwardDirection,CLOCKWISE)
+motor.braking_type = BrakingType.BRAKE
+rpm_speed = 50
+topSensor = UltrasonicSensor("D0")
+bottomSensor = UltrasonicSensor("D1")
+groundFloor = True
+
+while True:
+  dTop = topSensor.distance
+  dBotom = bottomSensor.distance
+  if dTop < 0.05 and groundFloor == True:
+    motor.set_target_rpm(rpm_speed)
+    if dBottom > 0.2:
+      motor.stop()
+      groundFloor = False
+    else:
+      pass
+  elif dTop < 0.05 and groundFloor == False:
+    motor.set_target_rpm(-rpm_speed)
+    if dBottom < 0.04:
+      motor.stop()
+      groundFloor = True
+    else:
+      pass
+  else:
+    pass
